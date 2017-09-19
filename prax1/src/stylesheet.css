@@ -1,0 +1,12 @@
+body {
+    margin: 0% 10% 0% 10%;
+    text-align: center;
+}
+
+p {
+    background-color: burlywood;
+}
+
+a:visited {
+    color: #000000;
+}
