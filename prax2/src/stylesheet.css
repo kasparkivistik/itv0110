@@ -1,0 +1,6 @@
+.boardCell {
+    margin: 1px;
+    border-color: #333;
+    border-width: 1px;
+    cursor: pointer;
+}
