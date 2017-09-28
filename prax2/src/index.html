@@ -13,12 +13,16 @@
         <option value="6">6 ruutu</option>
         <option value="9">9 ruutu</option>
     </select>
+    <input placeholder="Pommide arv" type="text" id="bombs"/>
     <button onclick="startGame()">Tee oma valik!</button>
-
-    <script>
-        board = makeBoard(5,2);
-        drawBoard(board);
-    </script>
 </div>
+<div class="board">
+    <div id="place1">
+    </div>
+</div>
+<script>
+    board = makeBoard(5, 2);
+    drawBoard(board);
+</script>
 </body>
 </html>

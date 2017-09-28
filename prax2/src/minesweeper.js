@@ -45,7 +45,7 @@ function drawBoard(board) {
         table += "</tr>";
     }
     table += "</table";
-    gid("place1").innerHTML = "uus sisu";
+    gid("place1").innerHTML = table;
 }
 
 function press(x, y) {
@@ -53,12 +53,20 @@ function press(x, y) {
 }
 
 function startGame() {
-    var s, value;
+    var s, value, bombs;
     console.log("startGame");
     s = gid("sizeselect");
+    console.log("index: " + s.selectedIndex);
     value = s.options[s.selectedIndex].value;
     console.log(s);
+    s = gid("bombs");
+    bombs = s.value;
+    console.log(bombs);
+    if (!bombs) {
+        alert("No bombs inserted");
+    }
 
-    var board = makeBoard(parseInt(value), 2);
+
+    var board = makeBoard(parseInt(value), parseInt(bombs));
     drawBoard(board);
 }
