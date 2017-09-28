@@ -40,7 +40,7 @@ function drawBoard(board) {
         table += "<tr>";
 
         for (var j = 0; j < board.length; j++) {
-            table += "<td class='boardCell' onclick='press("+i+","+j+")'>x</td>";
+            table += "<td class='boardCell' onclick='press(" + i + "," + j + ")'>x</td>";
         }
         table += "</tr>";
     }
@@ -69,4 +69,43 @@ function startGame() {
 
     var board = makeBoard(parseInt(value), parseInt(bombs));
     drawBoard(board);
+}
+
+// see on prax3 jaoks serveri asjad
+
+var request;
+var url;
+var response;
+var eresp;
+
+function myUpdateFun() {
+    console.log(request.readyState);
+    if (request.readyState === 4) {
+        console.log("Server is done!");
+        if (request.status === 200) {
+            console.log("Server sent data ok!");
+            response = request.responseText;
+            eresp = JSON.parse(response);
+            console.log(eresp);
+            var s = "";
+            for (var i = 0; i < eresp.length; i++) {
+                for (var j = 0; j < eresp[i]; j++) {
+                    s += " " + eresp[i][j];
+                }
+            }
+            gid("results").innerHTML = s;
+        } else if (request.status === 404)
+            alert("Request URL does not exist");
+        else
+            alert("Error: status code is " + request.status);
+    }
+
+}
+
+function ajaxCall() {
+    request = new XMLHttpRequest();
+    url = "http://dijkstra.cs.ttu.ee/~tammet/cgi-bin/otsi.py";
+    request.open("GET", url, true);
+    request.onreadystatechange = myUpdateFun;
+    request.send(null);
 }
