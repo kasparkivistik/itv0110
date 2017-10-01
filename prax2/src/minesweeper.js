@@ -55,7 +55,7 @@ function press(x, y) {
 function startGame() {
     var s, value, bombs;
     console.log("startGame");
-    s = gid("sizeselect");
+    s = gid("sizeSelect");
     console.log("index: " + s.selectedIndex);
     value = s.options[s.selectedIndex].value;
     console.log(s);
@@ -69,6 +69,11 @@ function startGame() {
 
     var board = makeBoard(parseInt(value), parseInt(bombs));
     drawBoard(board);
+}
+
+function log(text) {
+    var logString = gid("log");
+    logString.value = logString.value + text;
 }
 
 // see on prax3 jaoks serveri asjad
