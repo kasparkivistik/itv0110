@@ -1,36 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <link rel="stylesheet" href="stylesheet.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta charset="UTF-8">
     <title>Minesweeper</title>
-    <script src="minesweeper.js"></script>
+    <script src="app.js"></script>
+    <link href="stylesheet.css" rel="stylesheet"/>
 </head>
 <body>
-<div>
-    <select id="sizeSelect">
-        <option value="3">3 ruutu</option>
-        <option value="6">6 ruutu</option>
-        <option value="9">9 ruutu</option>
+<div class="page">
+    <select id="boardSize">
+        <option value="6">6x6</option>
+        <option value="9">9x9</option>
+        <option value="16">16x16</option>
     </select>
     <input placeholder="Pommide arv" type="text" id="bombs"/>
-    <button onclick="startGame()">Tee oma valik!</button>
-</div>
-<div class="board">
-    <div id="place1">
+    <button onclick="startGame()">Hakka mängima!</button>
+
+    <div id="tableLocation">
+    </div>
+
+
+    <div class="header">
+        Miinijahtija tulemused:
+        <p>
+            <label id="results"></label>
+        </p>
     </div>
 </div>
-
-<div class="header">
-    Miinijahtija tulemused:
-<p>
-
-</p>
-    </div>
-</div>
-
-<script>
-    board = makeBoard(5, 2);
-</script>
 </body>
 </html>
