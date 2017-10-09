@@ -1,9 +1,11 @@
 var sizeValue;
+var board;
+var bombs;
 
 function makeBoard(size, bombs) {
-    var board = [];
+    board = [];
     if (bombs >= size * size) {
-        alert("Ära pane nii palju pomme, sa debiilik");
+        alert("Ära pane nii palju pomme, sa totu");
     } else {
         for (var x = 0; x < size; x++) {
             board[x] = [];
@@ -24,53 +26,69 @@ function makeBoard(size, bombs) {
 }
 
 function neighbours(size, x, y) {
-    var list = [];
+    var count = 0;
     for (var i = -1; i <= 1; i++) {
         for (var j = -1; j <= 1; j++) {
             if (i === 0 && j === 0) continue;
             if ((x + i) >= 0 && (x + i) < size && (y + j) >= 0 && (y + j) < size) {
-                list.push([x + i, y + j]);
+                if (board[x + 1][y + j] === 1) {
+                    count += 1;
+                }
             }
         }
     }
-    return list;
+    return count;
 }
 
-function startGame() {
-    var size, bombs;
+function init() {
+    var size;
     size = document.getElementById("boardSize");
     sizeValue = size.options[size.selectedIndex].value;
     bombs = document.getElementById("bombs").value;
-    if (!bombs) {
+    if (bombs <= 0) {
         alert("Sisesta palun mõni pomm ka, ole hea");
     } else {
-        var board = makeBoard(sizeValue, bombs);
-        drawBoard(board);
+        board = makeBoard(sizeValue, bombs);
+        if (board !== []) {
+            drawBoard(board);
+        }
     }
 }
 
-function drawBoard(board) {
-    var table;
-    table = "<table>";
+function clickElement(x, y, cell) {
+    var clicks = 0;
+    if (board[parseInt(x)][parseInt(y)] === 1) {
+        if (confirm("Oh sind totukest, sa kaotasid")) {
+            init();
+        }
+        log("Kaotus! Käike: " + clicks);
+    } else {
+        cell.innerHTML = neighbours(board.length, parseInt(x), parseInt(y));
+        clicks++;
+        if (Math.pow(board.length, 2) - bombs === clicks) {
+            log("Võit! Käike: " + clicks);
+            if (confirm("Hea töö, tegid ära mängu")) {
+                init();
+            }
+        }
+    }
+}
 
+function drawBoard() {
+    var table = "<table>";
     for (var i = 0; i < board.length; i++) {
         table += "<tr>";
-
         for (var j = 0; j < board.length; j++) {
-            var cellName = i + "_" + j;
-            table += "<td id='" + cellName + "' onclick='clickElement(" + i + ", " + j + ", " + cellName + ", "+board+")'> </td>";
+            var cellId = "id_" + i + "_" + j;
+            table += "<td id=" + cellId + " onclick='clickElement(" + i + "," + j + "," + cellId + ")'></td>";
         }
         table += "</tr>";
-
     }
     table += "</table>";
     document.getElementById("tableLocation").innerHTML = table;
 }
 
-function clickElement(x, y, cellName, board) {
-    if (board[parseInt(x)][parseInt(y)] === 1) {
-        alert("You fucked up");
-    } else {
-        document.getElementById(cellName).value.innerHTML = neighbours(board.size, parseInt(x), parseInt(y));
-    }
+function log(text) {
+    var txt = document.getElementById("labelLog");
+    txt.innerHTML =  txt.innerHTML + text + "<br>";
 }

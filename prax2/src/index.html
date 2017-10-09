@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="UTF-8">
     <title>Minesweeper</title>
     <script src="app.js"></script>
     <link href="stylesheet.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/simplex/bootstrap.min.css"/>
 </head>
 <body>
-<div class="page">
+<div>
     <select id="boardSize">
         <option value="6">6x6</option>
         <option value="9">9x9</option>
         <option value="16">16x16</option>
     </select>
-    <input placeholder="Pommide arv" type="text" id="bombs"/>
-    <button onclick="startGame()">Hakka mängima!</button>
+    <input placeholder="Pommide arv" type="number" id="bombs" min="1"/>
+    <button class="btn btn-default" onclick="init()">Hakka mängima!</button>
 
     <div id="tableLocation">
     </div>
 
-
-    <div class="header">
-        Miinijahtija tulemused:
-        <p>
-            <label id="results"></label>
-        </p>
+    <div>
+        <h4 class="lead">Senised tulemused</h4>
+        <label class="labelLog"></label>
     </div>
 </div>
 </body>
