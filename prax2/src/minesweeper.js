@@ -1,6 +1,6 @@
 var board;
 
-function gid(x) {
+function getId(x) {
     return document.getElementById(x);
 }
 
@@ -32,6 +32,21 @@ function makeBoard(size, bombs) {
     return board;
 }
 
+function neighbours(size, x, y) {
+    var list = [];
+    for (var i = -1; i <= 1; i++) {
+        for (var j = -1; j <= 1; j++) {
+            // square is not a neighbour of itself
+            if (i === 0 && j === 0) continue;
+            // check whether the the neighbour is inside board bounds
+            if ((x + i) >= 0 && (x + i) < size && (y + j) >= 0 && (y + j) < size) {
+                list.push([x + i, y + j]);
+            }
+        }
+    }
+    return list;
+}
+
 function drawBoard(board) {
     var table;
     table = "<table>";
@@ -45,7 +60,7 @@ function drawBoard(board) {
         table += "</tr>";
     }
     table += "</table";
-    gid("place1").innerHTML = table;
+    getId("place1").innerHTML = table;
 }
 
 function press(x, y) {
@@ -55,11 +70,11 @@ function press(x, y) {
 function startGame() {
     var s, value, bombs;
     console.log("startGame");
-    s = gid("sizeSelect");
+    s = getId("sizeSelect");
     console.log("index: " + s.selectedIndex);
     value = s.options[s.selectedIndex].value;
     console.log(s);
-    s = gid("bombs");
+    s = getId("bombs");
     bombs = s.value;
     console.log(bombs);
     if (!bombs) {
@@ -72,7 +87,7 @@ function startGame() {
 }
 
 function log(text) {
-    var logString = gid("log");
+    var logString = getId("log");
     logString.value = logString.value + text;
 }
 
@@ -98,7 +113,7 @@ function myUpdateFun() {
                     s += " " + eresp[i][j];
                 }
             }
-            gid("results").innerHTML = s;
+            getId("results").innerHTML = s;
         } else if (request.status === 404)
             alert("Request URL does not exist");
         else
