@@ -1,6 +1,7 @@
 var sizeValue;
 var board;
 var bombs;
+var clicks;
 
 function makeBoard(size, bombs) {
     board = [];
@@ -31,7 +32,7 @@ function neighbours(size, x, y) {
         for (var j = -1; j <= 1; j++) {
             if (i === 0 && j === 0) continue;
             if ((x + i) >= 0 && (x + i) < size && (y + j) >= 0 && (y + j) < size) {
-                if (board[x + 1][y + j] === 1) {
+                if (board[x + i][y + j] === 1) {
                     count += 1;
                 }
             }
@@ -42,6 +43,7 @@ function neighbours(size, x, y) {
 
 function init() {
     var size;
+    clicks = 0;
     size = document.getElementById("boardSize");
     sizeValue = size.options[size.selectedIndex].value;
     bombs = document.getElementById("bombs").value;
@@ -56,7 +58,7 @@ function init() {
 }
 
 function clickElement(x, y, cell) {
-    var clicks = 0;
+    clicks += 1;
     if (board[parseInt(x)][parseInt(y)] === 1) {
         if (confirm("Oh sind totukest, sa kaotasid")) {
             init();
@@ -64,7 +66,7 @@ function clickElement(x, y, cell) {
         log("Kaotus! Käike: " + clicks);
     } else {
         cell.innerHTML = neighbours(board.length, parseInt(x), parseInt(y));
-        clicks++;
+        cell.style.backgroundColor = "dimgray";
         if (Math.pow(board.length, 2) - bombs === clicks) {
             log("Võit! Käike: " + clicks);
             if (confirm("Hea töö, tegid ära mängu")) {
