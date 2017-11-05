@@ -1,0 +1,24 @@
+td {
+    width: 30px;
+}
+
+tr {
+    height: 30px;
+}
+
+table, th, td {
+    border: 2px solid black;
+    cursor: pointer;
+    background: grey;
+    text-align: center;
+    color: white;
+}
+
+body {
+    text-align: center;
+}
+
+#tableLocation > table {
+    margin-right: auto;
+    margin-left: auto;
+}
