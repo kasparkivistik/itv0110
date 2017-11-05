@@ -1,37 +1,38 @@
 #!usr/bin/python
+# -*- coding: utf-8 -*-
 import cgi
 import cgitb
 import string
 
 cgitb.enable()
 
-print "Content-type: text/html"
+print "Content-type: text/html\n\n"
 
 formdata = cgi.FieldStorage()
 
-scorefile = "/home/kkivis/prax3/results.txt"
-template = "/home/kkivis/prax3/template.html"
+scorefile = "./prax3/results.txt"
+template = "./prax3/template.html"
 
 
-def show():
-    f = open(template, "r")
-    html = f.read()
-    f.close()
-
-    f = open(scorefile, "r")
-    content = f.readlines()
-    f.close()
-    htmlstring = ""
-    for row in content:
-        htmlstring += "<div>"
-        splitrow = row.split(",")
-        for column in splitrow:
-            htmlstring += column + " "
-        htmlstring += "</div>"
-    htmlstring = string.replace(html, "sisu", htmlstring)
-    print htmlstring
-
-
+#def show():
+#    f = open(template, "r")
+#    html = f.read()
+#    f.close()
+#
+#    f = open(scorefile, "r")
+#    content = f.readlines()
+#    f.close()
+#    htmlstring = ""
+#    for row in content:
+#        htmlstring += "<div>"
+#        splitrow = row.split(",")
+#        for column in splitrow:
+#            htmlstring += column + " "
+#        htmlstring += "</div>"
+#    htmlstring = string.replace(html, "sisu", htmlstring)
+#    print htmlstring
+#
+#
 def store():
     winner = ""
     player = ""
@@ -56,3 +57,5 @@ def store():
     f.close()
 
     print content
+
+store()
