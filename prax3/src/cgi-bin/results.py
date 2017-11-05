@@ -1,16 +1,12 @@
-#!usr/bin/python
-# -*- coding: utf-8 -*-
 import cgi
 import cgitb
-import string
-
-cgitb.enable()
 
 print "Content-type: text/html\n\n"
+print
 
-formdata = cgi.FieldStorage()
-
-scorefile = "./prax3/results.txt"
+cgitb.enable()
+form_data = cgi.FieldStorage()
+score_file = "./prax3/results.txt"
 template = "./prax3/template.html"
 
 
@@ -31,31 +27,29 @@ template = "./prax3/template.html"
 #        htmlstring += "</div>"
 #    htmlstring = string.replace(html, "sisu", htmlstring)
 #    print htmlstring
-#
-#
+
+
 def store():
     winner = ""
     player = ""
     table = ""
-    if formdata.has_key("winner"):
-        winner = formdata['winner'].value
-    if formdata.has_key("player"):
-        player = formdata['player'].value
-    if formdata.has_key("table"):
-        table = formdata['table'].value
+    if form_data.has_key("winner"):
+        winner = form_data['winner'].value
+    if form_data.has_key("player"):
+        player = form_data['player'].value
+    if form_data.has_key("table"):
+        table = form_data['table'].value
     if not winner or not player or not table:
         print "something wrong"
 
-    scorestring = player + ", " + table + ", " + winner
+    score_string = player + ", " + table + ", " + winner
 
-    f = open(scorefile, "a")
-    f.write(scorestring + "\n")
+    f = open(score_file, "a")
+    f.write(score_string + "\n")
     f.close()
 
-    f = open(scorefile, "r")
+    f = open(score_file, "r")
     content = f.read()
     f.close()
 
     print content
-
-store()
