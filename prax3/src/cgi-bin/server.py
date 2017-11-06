@@ -3,7 +3,6 @@
 import cgi
 import cgitb
 import string
-import sys
 
 cgitb.enable()
 
@@ -32,11 +31,13 @@ def show():
     f.close()
     html_string = ""
     for row in content:
-        html_string += "<td>"
+        html_string += "<tr>"
         split_row = row.split(",")
         for column in split_row:
+            html_string += "<td>"
             html_string += column
-        html_string += "</td>"
+            html_string += "</td>"
+        html_string += "</tr>"
     html_string = string.replace(html, "sisu", html_string)
     print html_string
 
@@ -53,7 +54,6 @@ def store():
         table = form_data['table'].value
     if not bombs or not player or not table:
         print "something wrong"
-        #sys.exit(0)
 
     score_string = table + ", " + player + ", " + bombs
 
