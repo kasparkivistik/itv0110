@@ -107,7 +107,7 @@ function sendResults() {
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py";
     url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
-    fetch(url).then(x = > x.text());
+    fetch(url).then(x => x.text());
 }
 
 function showResults() {
