@@ -44,7 +44,7 @@ function neighbours(size, x, y) {
 function init() {
     var size;
     clicks = 0;
-    var playerName = document.getElementById("playerName").value;
+    var playerName = document.getElementById("player").value;
     size = document.getElementById("boardSize");
     sizeValue = size.options[size.selectedIndex].value;
     bombs = document.getElementById("bombs").value;
@@ -59,17 +59,19 @@ function init() {
 }
 
 function clickElement(x, y, cell) {
+    var playerName = document.getElementById("player").value;
     clicks += 1;
     if (board[parseInt(x)][parseInt(y)] === 1) {
         if (confirm("Oh sind totukest, sa kaotasid")) {
+            sendResults();
             init();
         }
-        log("Kaotus! Käike: " + clicks + ", mängu sooritas: " + document.getElementById("playerName").value);
+        log("Kaotus! Käike: " + clicks + ", mängu sooritas: " + playerName);
     } else {
         cell.innerHTML = neighbours(board.length, parseInt(x), parseInt(y));
         cell.style.backgroundColor = "dimgray";
         if (Math.pow(board.length, 2) - bombs === clicks) {
-            log("Võit! Käike: " + clicks + ", mängu sooritas: " + document.getElementById("playerName").value);
+            log("Võit! Käike: " + clicks + ", mängu sooritas: " + playerName);
             sendResults();
             if (confirm("Hea töö, tegid ära mängu")) {
                 init();
@@ -94,7 +96,7 @@ function drawBoard() {
 
 function log(text) {
     var txt = document.getElementById("labelLog");
-    txt.innerHTML =  txt.innerHTML + text + "<br>";
+    txt.innerHTML = txt.innerHTML + text + "<br>";
 }
 
 // see on prax3 jaoks serveri asjad
@@ -139,16 +141,23 @@ function ajaxCall() {
 
 function sendResults() {
     var url;
-    var player = document.getElementById("playerName");
+    var player = document.getElementById("player");
     var boardSize = document.getElementById("boardSize");
     boardSize = boardSize.options[boardSize.selectedIndex].value;
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py";
-    url += "?board=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
-    //fetch(url).then(r => r.text()).then();
+    url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
+    //fetch(url).then(x = > x.text()).then(successFun);
 }
 
 function showResults() {
-    var url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py";
+    var url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py?op=show";
     window.open(url, "results");
 }
+
+function successFun(x) {
+    console.log("success what");
+    console.log(x);
+}
+
+
