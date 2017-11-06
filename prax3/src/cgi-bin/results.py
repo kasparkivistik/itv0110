@@ -1,3 +1,4 @@
+# _*_ coding: utf-8 _*_
 import cgi
 import cgitb
 import string
@@ -15,8 +16,10 @@ template = "/home/kkivis/prax3/template.html"
 def main():
     if form_data.has_key("op") and form_data["op"].value == "show":
         show()
+        print "aga siia?"
     else:
         store()
+        print "või siia?"
 
 
 def show():

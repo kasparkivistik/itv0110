@@ -156,11 +156,6 @@ function showResults() {
 }
 
 function successFun(x) {
-    console.log("success what");
+    console.log("success ");
     console.log(x);
 }
-
-function addResult(result) {
-
-}
-
