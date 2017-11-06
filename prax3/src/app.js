@@ -44,11 +44,12 @@ function neighbours(size, x, y) {
 function init() {
     var size;
     clicks = 0;
+    var playerName = document.getElementById("playerName").value;
     size = document.getElementById("boardSize");
     sizeValue = size.options[size.selectedIndex].value;
     bombs = document.getElementById("bombs").value;
-    if (bombs <= 0) {
-        alert("Sisesta palun mõni pomm ka, ole hea");
+    if (bombs <= 0 || playerName == "") {
+        alert("Täida kõik lahtrid ära, ole nii armas");
     } else {
         board = makeBoard(sizeValue, bombs);
         if (board !== []) {
@@ -144,7 +145,7 @@ function sendResults() {
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py";
     url += "?board=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
-    fetch(url).then(r => r.text()).then();
+    //fetch(url).then(r => r.text()).then();
 }
 
 function showResults() {

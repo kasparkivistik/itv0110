@@ -6,27 +6,8 @@ print
 
 cgitb.enable()
 form_data = cgi.FieldStorage()
-score_file = "./prax3/results.txt"
-template = "./prax3/template.html"
-
-
-#def show():
-#    f = open(template, "r")
-#    html = f.read()
-#    f.close()
-#
-#    f = open(scorefile, "r")
-#    content = f.readlines()
-#    f.close()
-#    htmlstring = ""
-#    for row in content:
-#        htmlstring += "<div>"
-#        splitrow = row.split(",")
-#        for column in splitrow:
-#            htmlstring += column + " "
-#        htmlstring += "</div>"
-#    htmlstring = string.replace(html, "sisu", htmlstring)
-#    print htmlstring
+score_file = "home/kkivis/public_html/prax3/results.txt"
+template = "home/kkivis/public_html/prax3/template.html"
 
 
 def store():
