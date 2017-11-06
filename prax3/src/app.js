@@ -99,46 +99,6 @@ function log(text) {
     txt.innerHTML = txt.innerHTML + text + "<br>";
 }
 
-// see on prax3 jaoks serveri asjad
-
-/*var request;
-var url;
-var response;
-var eresp;
-
-function myUpdateFun() {
-    console.log(request.readyState);
-    if (request.readyState === 4) {
-        console.log("Server is done!");
-        if (request.status === 200) {
-            console.log("Server sent data ok!");
-            response = request.responseText;
-            eresp = JSON.parse(response);
-            console.log(eresp);
-            var s = "";
-            for (var i = 0; i < eresp.length; i++) {
-                for (var j = 0; j < eresp[i]; j++) {
-                    s += " " + eresp[i][j];
-                }
-            }
-            getId("results").innerHTML = s;
-        } else if (request.status === 404)
-            alert("Request URL does not exist");
-        else
-            alert("Error: status code is " + request.status);
-    }
-
-}
-
-function ajaxCall() {
-    request = new XMLHttpRequest();
-    url = "http://dijkstra.cs.ttu.ee/~tammet/cgi-bin/otsi.py";
-    request.open("GET", url, true);
-    request.onreadystatechange = myUpdateFun;
-    request.send(null);
-}
-*/
-
 function sendResults() {
     var url;
     var player = document.getElementById("player").value;
@@ -147,15 +107,10 @@ function sendResults() {
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py";
     url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
-    //fetch(url).then(x = > x.text()).then(successFun);
+    fetch(url).then(x = > x.text());
 }
 
 function showResults() {
     var url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py?op=show";
     window.open(url, "results");
-}
-
-function successFun(x) {
-    console.log("success ");
-    console.log(x);
 }

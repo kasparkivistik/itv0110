@@ -1,25 +1,26 @@
+#!usr/bin/python
 # _*_ coding: utf-8 _*_
+
 import cgi
 import cgitb
 import string
 import sys
 
 cgitb.enable()
+
 print "Content-type: text/html\n\n"
 print
 
 form_data = cgi.FieldStorage()
-score_file = "/home/kkivis/prax3/results.txt"
-template = "/home/kkivis/prax3/template.html"
+score_file = "/home/kkivis/public_html/prax3/results.txt"
+template = "/home/kkivis/public_html/prax3/template.html"
 
 
 def main():
     if form_data.has_key("op") and form_data["op"].value == "show":
         show()
-        print "aga siia?"
     else:
         store()
-        print "või siia?"
 
 
 def show():
