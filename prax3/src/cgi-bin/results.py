@@ -32,7 +32,7 @@ def show():
         html_string += "<div class='results'>"
         split_row = row.split(",")
         for column in split_row:
-            html_string += column + " "
+            html_string += column
         html_string += "</div>"
     html_string = string.replace(html, "sisu", html_string)
     print html_string
@@ -57,12 +57,6 @@ def store():
     f = open(score_file, "a")
     f.write(score_string + "\n")
     f.close()
-
-    f = open(score_file, "r")
-    content = f.read()
-    f.close()
-
-    print content
 
 
 main()

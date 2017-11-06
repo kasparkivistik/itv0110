@@ -141,7 +141,7 @@ function ajaxCall() {
 
 function sendResults() {
     var url;
-    var player = document.getElementById("player");
+    var player = document.getElementById("player").value;
     var boardSize = document.getElementById("boardSize");
     boardSize = boardSize.options[boardSize.selectedIndex].value;
     var bombValue = document.getElementById("bombs").value;
@@ -160,4 +160,7 @@ function successFun(x) {
     console.log(x);
 }
 
+function addResult(result) {
+
+}
 
