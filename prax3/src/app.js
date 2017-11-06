@@ -105,12 +105,12 @@ function sendResults() {
     var boardSize = document.getElementById("boardSize");
     boardSize = boardSize.options[boardSize.selectedIndex].value;
     var bombValue = document.getElementById("bombs").value;
-    url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py";
+    url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/server.py";
     url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
     fetch(url).then(x => x.text());
 }
 
 function showResults() {
-    var url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/results.py?op=show";
-    window.open(url, "results");
+    var url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/server.py?op=show";
+    window.open(url, "server");
 }
