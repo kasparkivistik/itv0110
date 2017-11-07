@@ -3,6 +3,10 @@ var board;
 var bombs;
 var clicks;
 
+function hasWon() {
+    return clicks === Math.pow(board.length, 2) - bombs;
+}
+
 function makeBoard(size, bombs) {
     board = [];
     if (bombs >= size * size) {
@@ -49,7 +53,7 @@ function init() {
     sizeValue = size.options[size.selectedIndex].value;
     bombs = document.getElementById("bombs").value;
     if (bombs <= 0 || playerName == "") {
-        alert("Täida kõik lahtrid ära, ole nii armas");
+        alert("Täida kõik lahtrid ära, ole nii armas ja ära pane nime sisse koma, sa tolgus");
     } else {
         board = makeBoard(sizeValue, bombs);
         if (board !== []) {
@@ -62,11 +66,11 @@ function clickElement(x, y, cell) {
     var playerName = document.getElementById("player").value;
     clicks += 1;
     if (board[parseInt(x)][parseInt(y)] === 1) {
+        sendResults();
+        log("Kaotus! Käike: " + clicks + ", mängu sooritas: " + playerName);
         if (confirm("Oh sind totukest, sa kaotasid")) {
-            sendResults();
             init();
         }
-        log("Kaotus! Käike: " + clicks + ", mängu sooritas: " + playerName);
     } else {
         cell.innerHTML = neighbours(board.length, parseInt(x), parseInt(y));
         cell.style.backgroundColor = "dimgray";
@@ -106,7 +110,7 @@ function sendResults() {
     boardSize = boardSize.options[boardSize.selectedIndex].value;
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/server.py";
-    url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue;
+    url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue + "&moves=" + clicks;
     fetch(url).then(x => x.text());
 }
 
