@@ -76,6 +76,7 @@ def store():
     player = ""
     table = ""
     moves = ""
+    state = ""
     if form_data.has_key("bombs"):
         bombs = form_data['bombs'].value
     if form_data.has_key("player"):
@@ -84,11 +85,13 @@ def store():
         table = form_data['table'].value
     if form_data.has_key("moves"):
         moves = form_data['moves'].value
-    if not bombs or not player or not table or not moves:
+    if form_data.has_key("state"):
+        state = form_data['state'].value
+    if not bombs or not player or not table or not moves or not state:
         print "please enter keys and their cooperative values in the url up in the address bar"
         print "thanks"
 
-    score_string = player + ", " + table + ", " + bombs + ", " + moves
+    score_string = player + ", " + table + ", " + bombs + ", " + moves + ", " + state
 
     f = open(score_file, "a")
     f.write(score_string + "\n")

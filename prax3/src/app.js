@@ -3,8 +3,8 @@ var board;
 var bombs;
 var clicks;
 
-function hasWon() {
-    return clicks === Math.pow(board.length, 2) - bombs;
+function hasWon(condition) {
+
 }
 
 function makeBoard(size, bombs) {
@@ -66,7 +66,7 @@ function clickElement(x, y, cell) {
     var playerName = document.getElementById("player").value;
     clicks += 1;
     if (board[parseInt(x)][parseInt(y)] === 1) {
-        sendResults();
+        sendResults("Lost");
         log("Kaotus! Käike: " + clicks + ", mängu sooritas: " + playerName);
         if (confirm("Oh sind totukest, sa kaotasid")) {
             init();
@@ -76,11 +76,12 @@ function clickElement(x, y, cell) {
         cell.style.backgroundColor = "dimgray";
         if (Math.pow(board.length, 2) - bombs === clicks) {
             log("Võit! Käike: " + clicks + ", mängu sooritas: " + playerName);
-            sendResults();
+            sendResults("Victory");
             if (confirm("Hea töö, tegid ära mängu")) {
                 init();
             }
         }
+        document.getElementById(cell).removeAttribute('onclick');
     }
 }
 
@@ -103,14 +104,16 @@ function log(text) {
     txt.innerHTML = txt.innerHTML + text + "<br>";
 }
 
-function sendResults() {
+function sendResults(wonOrLost) {
     var url;
     var player = document.getElementById("player").value;
     var boardSize = document.getElementById("boardSize");
     boardSize = boardSize.options[boardSize.selectedIndex].value;
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/server.py";
-    url += "?table=" + boardSize + "&player=" + player + "&bombs=" + bombValue + "&moves=" + clicks;
+    url += "?table=" + boardSize + "&player=" + player
+        + "&bombs=" + bombValue + "&moves=" + clicks
+        + "&state=" + wonOrLost;
     fetch(url).then(x => x.text());
 }
 
