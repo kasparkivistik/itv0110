@@ -15,10 +15,13 @@ template = "/home/kkivis/public_html/prax3/template.html"
 
 
 def main():
-    if form_data.has_key("op") and form_data["op"].value == "show":
+    if form_data.has_key("op") and form_data['op'].value == "show":
         show()
-    elif form_data.has_key("op") and form_data["op"].value == "sort":
-        sort(form_data["playerName"].value)
+    elif form_data.has_key("op") and form_data['op'].value == "sort":
+        if form_data.has_key("playerName"):
+            sort(form_data["playerName"].value)
+        else:
+            show()
     else:
         store()
 
@@ -35,15 +38,15 @@ def sort(name):
     html_string = ""
     count = 0
     for row in content:
-        count += 1
         if count == 100:
             break
         elif name in row:
+            count += 1
             html_string += "<tr>"
             split_row = row.split(",")
             for column in split_row:
                 html_string += "<td>" + column + "</td>"
-        html_string += "</tr>"
+    html_string += "</tr>"
     html_string = string.replace(html, "sisu", html_string)
     print html_string
 
