@@ -74,6 +74,7 @@ function clickElement(x, y, cell) {
     } else {
         cell.innerHTML = neighbours(board.length, parseInt(x), parseInt(y));
         cell.style.backgroundColor = "dimgray";
+        cell.onclick = null;
         if (Math.pow(board.length, 2) - bombs === clicks) {
             log("Võit! Käike: " + clicks + ", mängu sooritas: " + playerName);
             sendResults("Victory");
@@ -81,7 +82,6 @@ function clickElement(x, y, cell) {
                 init();
             }
         }
-        document.getElementById(cell).removeAttribute('onclick');
     }
 }
 
