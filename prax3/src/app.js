@@ -2,10 +2,8 @@ var sizeValue;
 var board;
 var bombs;
 var clicks;
-
-function hasWon(condition) {
-
-}
+var boardSize = document.getElementById("boardSize");
+var playerName = document.getElementById("player");
 
 function makeBoard(size, bombs) {
     board = [];
@@ -48,11 +46,10 @@ function neighbours(size, x, y) {
 function init() {
     var size;
     clicks = 0;
-    var playerName = document.getElementById("player").value;
     size = document.getElementById("boardSize");
     sizeValue = size.options[size.selectedIndex].value;
     bombs = document.getElementById("bombs").value;
-    if (bombs <= 0 || playerName == "") {
+    if (bombs <= 0 || playerName.value === "") {
         alert("Täida kõik lahtrid ära, ole nii armas ja ära pane nime sisse koma, sa tolgus");
     } else {
         board = makeBoard(sizeValue, bombs);
@@ -107,11 +104,10 @@ function log(text) {
 function sendResults(wonOrLost) {
     var url;
     var player = document.getElementById("player").value;
-    var boardSize = document.getElementById("boardSize");
-    boardSize = boardSize.options[boardSize.selectedIndex].value;
+    var boardValue = boardSize.options[boardSize.selectedIndex].value;
     var bombValue = document.getElementById("bombs").value;
     url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/server.py";
-    url += "?table=" + boardSize + "&player=" + player
+    url += "?table=" + boardValue + "&player=" + player
         + "&bombs=" + bombValue + "&moves=" + clicks
         + "&state=" + wonOrLost;
     fetch(url).then(x => x.text());
@@ -120,4 +116,22 @@ function sendResults(wonOrLost) {
 function showResults() {
     var url = "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/server.py?op=show";
     window.open(url, "server");
+}
+
+function saveResults() {
+    if (playerName.value ===  "") {
+        alert("Sisesta mängijale nimi, sa ei saa muud moodi salvestada");
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "http://dijkstra.cs.ttu.ee/~kkivis/cgi-bin/score.py",
+            data: JSON.stringify({
+                boardSize: document.getElementById("bombs").value,
+                player: document.getElementById("playerName").value,
+                board: boardSize.options[boardSize.selectedIndex].value
+            }),
+            contentType: "application.json",
+            dataType: 'json'
+        });
+    }
 }
