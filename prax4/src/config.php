@@ -8,4 +8,4 @@ function escape($db, $string) {
     $string = mysqli_real_escape_string($db, $string);
     $string = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
     return $string;
-    }
+}

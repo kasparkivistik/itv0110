@@ -76,10 +76,11 @@ function validifyData($username, $db) {
 if (isset($_REQUEST['username']) and isset($_REQUEST['password']) and isset($_REQUEST['fullname']) and isset($_REQUEST['email'])) {
     $username = escape($connection, $_REQUEST['username']);
     $password = escape($connection, $_REQUEST['password']);
+    $hash = hash('md5', $password);
     $fullname = escape($connection, $_REQUEST["fullname"]);
     $email = escape($connection, $_REQUEST["email"]);
     if (validifyData($username, $connection)) {
-        $sql = "INSERT INTO 164347_users VALUES ('$username', '$password', '$fullname', '$email')";
+        $sql = "INSERT INTO 164347_users VALUES ('$username', '$hash', '$fullname', '$email')";
         if ($connection->query($sql) === true) {
             $message = "Success!";
             echo "<script type='text/javascript'>alert('$message');</script>";
