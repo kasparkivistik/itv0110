@@ -50,7 +50,7 @@ include("header.php");
     if (isset($_REQUEST['username']) and isset($_REQUEST['password'])) {
         $username = $_REQUEST['username'];
         $password = $_REQUEST['password'];
-        $password = hash('md5', $password);
+        $password = hash('sha512', $password);
         $query = "SELECT * FROM 164347_users WHERE user_name = '$username' AND password = '$password'";
         if (count(mysqli_fetch_array(mysqli_query($connection, $query)))) {
             $_SESSION['username'] = $username;

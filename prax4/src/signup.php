@@ -76,7 +76,7 @@ function validifyData($username, $db) {
 if (isset($_REQUEST['username']) and isset($_REQUEST['password']) and isset($_REQUEST['fullname']) and isset($_REQUEST['email'])) {
     $username = escape($connection, $_REQUEST['username']);
     $password = escape($connection, $_REQUEST['password']);
-    $hash = hash('md5', $password);
+    $hash = hash('sha512', $password);
     $fullname = escape($connection, $_REQUEST["fullname"]);
     $email = escape($connection, $_REQUEST["email"]);
     if (validifyData($username, $connection)) {
