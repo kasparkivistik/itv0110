@@ -54,7 +54,7 @@ if (isset($_SESSION['username'])) {
 $commentQuery = "SELECT * FROM 164347_comments WHERE post_id = $id";
 $commentResult = mysqli_query($connection, $commentQuery);
 echo '<legend>comments</legend>';
-while ($commentRow = mysqli_fetch_assoc($commentResult)) {
+while ($commentRow = mysqli_fetch_assoc($commentResult  )) {
     $commentRow = array_values($commentRow);
     echo '<div class="centered-content">
 Published by ' . $commentRow[2] . ' at ' . $commentRow[3] . '<br>

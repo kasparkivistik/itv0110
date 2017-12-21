@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>rock papa scisas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css">
-    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <title>kolmeraudne</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body class="centered-wrapper">
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">rock papa scisas</a>
+    <a class="navbar-brand" href="#">see koht kus mihkel raual see saade on</a>
 </nav>
-<h1 class="centered-content">vali oma lemmik</h1>
-
-<div class="container centered-content">
-    <a id="playerrock"><img width="150" height="150" src="rock.png" alt="kivi"></a>
-    <a id="playerpaper"><img width="150" height="150" src="paper.jpg" alt="paber"></a>
-    <a id="playerscissors"><img width="150" height="150" src="scissors.jpg" alt="käärid"></a>
-
+<div class="centered-content">
+<form method="post">
+    <br><br><input type="text" placeholder="name" id="player-name"><br><br>
+    <button id="rock" type="submit" onclick="postMove('rock')">Rock</button>
+    <button id="paper" type="submit" onclick="postMove('paper')">Paper</button>
+    <button id="scissors" type="submit" onclick="postMove('scissors')">Scissors</button>
+</form>
 </div>
+
+<div id="result">
+</div>
+<footer class="well well-sm">sau ma kaspar kivistik 164347 <br>
+    paneme siia ruttu see 7.5 ära siis ma saan selle aine nelja ja olen õnnelik</footer>
 </body>
 </html>
